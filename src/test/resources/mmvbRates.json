@@ -1,0 +1,21 @@
+{
+  "cbrf": {
+    "metadata": {
+      "USDTOM_UTS_CLOSEPRICE": {"type": "double"},
+      "USDTOM_UTS_CLOSEPRICETOPREVPRCN": {"type": "double"},
+      "USDTOM_UTS_TRADEDATE": {"type": "date", "bytes": 10, "max_size": 0},
+      "CBRF_USD_LAST": {"type": "double"},
+      "CBRF_USD_LASTCHANGEPRCNT": {"type": "double"},
+      "CBRF_USD_TRADEDATE": {"type": "date", "bytes": 10, "max_size": 0},
+      "CBRF_EUR_LAST": {"type": "double"},
+      "CBRF_EUR_LASTCHANGEPRCNT": {"type": "double"},
+      "CBRF_EUR_TRADEDATE": {"type": "date", "bytes": 10, "max_size": 0},
+      "TODAY_VALTODAY": {"type": "double"},
+      "TODAY_VALTODAY_USD": {"type": "double"},
+      "TODAY_DATE": {"type": "datetime", "bytes": 19, "max_size": 0}
+    },
+    "columns": ["USDTOM_UTS_CLOSEPRICE", "USDTOM_UTS_CLOSEPRICETOPREVPRCN", "USDTOM_UTS_TRADEDATE", "CBRF_USD_LAST", "CBRF_USD_LASTCHANGEPRCNT", "CBRF_USD_TRADEDATE", "CBRF_EUR_LAST", "CBRF_EUR_LASTCHANGEPRCNT", "CBRF_EUR_TRADEDATE", "TODAY_VALTODAY", "TODAY_VALTODAY_USD", "TODAY_DATE"],
+    "data": [
+      [62.903702, -0.1362, "2016-10-28", 62.9037, -0.1362, "2016-10-29", 68.6783, -0.0793, "2016-10-29", 1102.0771, 17482.21558056, "2016-10-28 23:50:02"]
+    ]
+  }}
