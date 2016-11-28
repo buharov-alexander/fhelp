@@ -50,10 +50,9 @@ public class MmvbServiceTest {
         JSONObject jsonObject = new JSONObject(MMVB_RATES_EXAMPlE);
         when(jsonService.getJsonFromUrl(anyString())).thenReturn(jsonObject);
 
-        Map<String, Double> res = mmvbService.getCurrentCbrfRates();
-
-        Assert.assertEquals(res.get(ValutaEnum.EUR.toString()), 68.6783, DELTA);
-        Assert.assertEquals(res.get(ValutaEnum.USD.toString()), 62.9037, DELTA);
+        Map<String, Double> rates = mmvbService.getCurrentCbrfRates();
+        Assert.assertEquals(rates.get(ValutaEnum.EUR.toString()), 68.6783, DELTA);
+        Assert.assertEquals(rates.get(ValutaEnum.USD.toString()), 62.9037, DELTA);
     }
 
 }

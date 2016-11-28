@@ -18,6 +18,9 @@ import java.util.Map;
 public class MmvbServiceImpl implements MmvbService {
 
     private static final String MMVB_RATES_URL = "http://moex.com/iss/statistics/engines/currency/markets/selt/rates.json";
+    private static final String CBRF = "cbrf";
+    private static final String COLUMNS = "columns";
+    private static final String DATA = "data";
 
     private Logger log = LoggerFactory.getLogger(MmvbServiceImpl.class);
 
@@ -36,9 +39,10 @@ public class MmvbServiceImpl implements MmvbService {
 
     private Map<String, Double> parseRatesJson(JSONObject jsonObject) {
         Map<String, Double> rates = new HashMap<>();
-        JSONObject cbrf = jsonObject.getJSONObject("cbrf");
-        JSONArray columns = cbrf.getJSONArray("columns");
-        JSONArray data = cbrf.getJSONArray("data").getJSONArray(0);
+        JSONObject cbrf = jsonObject.getJSONObject(CBRF);
+        JSONArray columns = cbrf.getJSONArray(COLUMNS);
+        JSONArray data = cbrf.getJSONArray(DATA).getJSONArray(0);
+
         for (int i = 0; i < columns.length(); ++i) {
             String col = columns.getString(i);
             switch (col) {
