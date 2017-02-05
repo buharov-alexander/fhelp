@@ -13,7 +13,7 @@ import ru.bukharov.fhelp.mmvb.service.MmvbService;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/mmvb")
+@RequestMapping("/fhelp/mmvb")
 public class MmvbController {
 
     @Autowired

@@ -1,8 +1,9 @@
-target/
+/fhelp-ui-react/target/
+/fhelp-core/target/
 !.mvn/wrapper/maven-wrapper.jar
 
-node_modules/
-src/main/resources/static/built/
+/fhelp-ui-react/node_modules/
+/fhelp-ui-react/src/main/resources/static/built/
 
 ### STS ###
 .apt_generated
