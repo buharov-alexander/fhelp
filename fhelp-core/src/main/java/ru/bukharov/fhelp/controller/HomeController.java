@@ -13,8 +13,7 @@ import java.util.Map;
 public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String getCurrentCbrfRates(ModelMap model) {
+    public String getHomePage() {
         return "homepage";
     }
-
 }
