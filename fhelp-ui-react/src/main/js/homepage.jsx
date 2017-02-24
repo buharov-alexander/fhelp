@@ -1,60 +1,68 @@
 'use strict';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const client = require('./client');
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import AccountTable from './accountTable';
+import AccountPieChart from './accountPieChart';
+import ValutesRate from './valutesRate';
+import {PageHeader, Grid, Row, Col} from 'react-bootstrap';
+import client from './client';
 
-var AccountTable = React.createClass({
+class HomePage extends Component {
+    render() {
+        return (
+            <div className="App">
+                <PageHeader>Financial helper <small>Accounts</small></PageHeader>
+                <Content />
+            </div>
+        );
+    }
+}
+
+var Content = React.createClass({
     getInitialState: function () {
-        return ({accounts: []});
+        return ({accounts: [], rates: {}});
     },
     componentDidMount: function () {
-        client({method: 'GET', path: '/fhelp/data/accounts'}).done(response => {
-            this.setState({accounts: response.entity._embedded.accounts});
+        client({method: 'GET', path: '/fhelp/mmvb/rates'}).then(response => {
+            this.setState({rates: response.entity});
+            return client({method: 'GET', path: '/fhelp/data/accounts'});
+        }).then(response => {
+            var accounts = response.entity._embedded.accounts.map(account =>
+                calculateRubleEquivalent(account, this.state.rates));
+            this.setState({accounts: accounts});
         });
     },
     render: function () {
-        return (
-            <AccountList accounts={this.state.accounts}/>
-        )
+        return (<Grid>
+            <Row className="show-grid">
+                <Col md={8}>
+                    <AccountTable accounts={this.state.accounts}/>
+                </Col>
+                <Col md={4}>
+                    <ValutesRate rates={this.state.rates}/>
+                    <AccountPieChart accounts={this.state.accounts}/>
+                </Col>
+            </Row>
+        </Grid>);
     }
-})
-
-class AccountList extends React.Component{
-    render() {
-        var accounts = this.props.accounts.map(account =>
-            <Account key={account._links.self.href} account={account}/>
-        );
-        return (
-            <table>
-                <tbody>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Valuta</th>
-                    <th>Balance</th>
-                </tr>
-                {accounts}
-                </tbody>
-            </table>
-        )
-    }
-}
-
-class Account extends React.Component{
-    render() {
-        return (
-            <tr>
-                <td>{this.props.account.name}</td>
-                <td>{this.props.account.type}</td>
-                <td>{this.props.account.valuta}</td>
-                <td>{this.props.account.balance}</td>
-            </tr>
-        )
-    }
-}
+});
 
 ReactDOM.render(
-    <AccountTable />,
+    <HomePage />,
     document.getElementById('react')
-)
+);
+
+function calculateRubleEquivalent(account, rates) {
+    switch(account.valuta) {
+        case 'USD':
+            account.rubBalance = account.balance*rates.USD;
+            break;
+        case 'EUR':
+            account.rubBalance = account.balance*rates.EUR;
+            break;
+        default:
+            account.rubBalance = account.balance;
+    }
+    return account;
+}
