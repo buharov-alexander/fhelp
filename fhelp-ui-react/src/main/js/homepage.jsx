@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import AccountTable from './accountTable';
-import AccountPieChart from './accountPieChart';
+import {AccountChart, ValutaChart} from './accountChart';
 import ValutesRate from './valutesRate';
 import {PageHeader, Grid, Row, Col} from 'react-bootstrap';
 import client from './client';
@@ -41,7 +41,8 @@ var Content = React.createClass({
                 </Col>
                 <Col md={4}>
                     <ValutesRate rates={this.state.rates}/>
-                    <AccountPieChart accounts={this.state.accounts}/>
+                    <AccountChart accounts={this.state.accounts}/>
+                    <ValutaChart accounts={this.state.accounts}/>
                 </Col>
             </Row>
         </Grid>);

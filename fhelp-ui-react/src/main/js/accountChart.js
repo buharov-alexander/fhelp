@@ -39,13 +39,13 @@ function generateColors(length) {
 };
 
 
-class AccountPieChart extends Component {
+class AccountChart extends Component {
     render() {
         var labels = [],
         values = [],
         colors = generateColors(this.props.accounts.length);
 
-        this.props.accounts.map(account => {
+        this.props.accounts.forEach(account => {
             labels.push(account.name);
             values.push(account.rubBalance);
         });
@@ -63,4 +63,39 @@ class AccountPieChart extends Component {
     };
 }
 
-export default AccountPieChart;
+class ValutaChart extends Component {
+    render() {
+        var valutaMap = new Map(),
+        colors = generateColors(this.props.accounts.length);
+
+        valutaMap.set('RUB', 0);
+        valutaMap.set('USD', 0);
+        valutaMap.set('EUR', 0);
+
+        this.props.accounts.forEach(account => {
+            var value = valutaMap.get(account.valuta);
+            valutaMap.set(account.valuta, value + account.rubBalance);
+        });
+
+        var labels = [],
+        values = [];
+
+        valutaMap.forEach((value, key, map) => {
+            labels.push(key);
+            values.push(value);
+        });
+        
+        var data = { 
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors,
+                hoverBackgroundColor: colors
+            }]
+        };
+
+        return <Pie data={data} options={options}/>;
+    };
+}
+
+export {AccountChart, ValutaChart};
