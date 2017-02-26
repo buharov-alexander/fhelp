@@ -8,18 +8,30 @@ class AccountTable extends Component {
         var accounts = this.props.accounts.map(account =>
             <Account key={account._links.self.href} account={account}/>
         );
+
+        var total = 0;
+        this.props.accounts.forEach(account => {
+            total+=account.rubBalance;
+        });
         return (
-            <Table striped bordered condensed hover>
+            <Table id="borderless" striped bordered condensed hover>
                 <tbody>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Valuta</th>
-                    <th>Balance</th>
-                    <th>Ruble balance</th>
-                </tr>
-                {accounts}
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Valuta</th>
+                        <th>Balance</th>
+                        <th>Ruble balance</th>
+                    </tr>
+                    {accounts}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td id="borderless" colSpan="3"></td>
+                        <th>Total:</th>
+                        <td>{total}</td>
+                    </tr>
+                </tfoot>
             </Table>
         )
     };
