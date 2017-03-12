@@ -22,11 +22,11 @@ const options = {
 };
 
 const colorSet = [
-    '#EF476F',
-    '#FFD166',
-    '#06D6A0',
-    '#118AB2',
-    '#073B4C',
+    '#286090',
+    '#5cb85c',
+    '#5bc0de',
+    '#ec971f',
+    '#d9534f',
     '#FF7733'
 ];
 
