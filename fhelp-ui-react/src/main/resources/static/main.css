@@ -5,3 +5,7 @@ td, th {
 #borderless{
     border: none;
 }
+
+.pageHeader{
+	padding-left: 15px;
+}

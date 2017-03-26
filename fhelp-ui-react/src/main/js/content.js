@@ -13,7 +13,7 @@ class Content  extends Component {
     render() {
         return (
             <div>
-                <PageHeader>Financial helper <small>Accounts</small></PageHeader>
+                <PageHeader className="pageHeader">Financial helper <small>Accounts</small></PageHeader>
                 <Grid>
                     <Row className="show-grid">
                         <Col md={8}>
