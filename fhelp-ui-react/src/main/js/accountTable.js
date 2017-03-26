@@ -1,15 +1,16 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Table} from 'react-bootstrap';
 
 class AccountTable extends Component {
     render() {
-        var accounts = this.props.accounts.map(account =>
+        const accounts = this.props.accounts.map(account =>
             <Account key={account._links.self.href} account={account}/>
         );
 
-        var total = 0;
+        let total = 0;
         this.props.accounts.forEach(account => {
             total+=account.rubBalance;
         });
@@ -33,8 +34,8 @@ class AccountTable extends Component {
                     </tr>
                 </tfoot>
             </Table>
-        )
-    };
+        );
+    }
 }
 
 class Account extends Component {
@@ -47,8 +48,14 @@ class Account extends Component {
                 <td>{this.props.account.balance}</td>
                 <td>{this.props.account.rubBalance}</td>
             </tr>
-        )
-    };
+        );
+    }
 }
 
-export default AccountTable;
+function mapStateToProps (state) {
+    return {
+        accounts: state.accounts,
+    }
+}
+
+export default connect(mapStateToProps)(AccountTable);

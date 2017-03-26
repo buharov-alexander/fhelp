@@ -4,8 +4,7 @@ import {createStore} from 'redux';
 import client from './client';
 
 function configureStore() {
-    const store = createStore(storeReducer, {accounts: [], rates: {}});
-    return store;
+    return createStore(storeReducer, {accounts: [], rates: {}});;
 }
 
 function storeReducer(state = [], action) {
@@ -16,12 +15,12 @@ function storeReducer(state = [], action) {
 }
 
 function loadData(store) {
-    var data = {};
+    const data = {};
     client({method: 'GET', path: '/fhelp/mmvb/rates'}).then(response => {
             data.rates = response.entity;
             return client({method: 'GET', path: '/fhelp/data/accounts'});
         }).then(response => {
-            var accounts = response.entity._embedded.accounts.map(account =>
+            const accounts = response.entity._embedded.accounts.map(account =>
                 calculateRubleEquivalent(account, data.rates));
             data.accounts = accounts;
             store.dispatch({ type: "LOAD_DATA", payload: data});

@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Panel} from 'react-bootstrap';
 
 class ValutesRate extends Component{
@@ -12,4 +13,11 @@ class ValutesRate extends Component{
     }
 }
 
-export default ValutesRate;
+function mapStateToProps (state) {
+    return {
+        accounts: state.accounts,
+        rates: state.rates
+    }
+}
+
+export default connect(mapStateToProps)(ValutesRate);

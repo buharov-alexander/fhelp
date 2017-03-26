@@ -5,15 +5,26 @@ import {connect} from 'react-redux';
 import {Pie} from 'react-chartjs-2';
 import {options, generateColors} from './chartOptions'
 
-class AccountChart extends Component {
+class ValutaChart extends Component {
     render() {
-        const labels = [],
-        values = [],
+        const valutaMap = new Map(),
         colors = generateColors(this.props.accounts.length);
 
+        valutaMap.set('RUB', 0);
+        valutaMap.set('USD', 0);
+        valutaMap.set('EUR', 0);
+
         this.props.accounts.forEach(account => {
-            labels.push(account.name);
-            values.push(account.rubBalance);
+            const value = valutaMap.get(account.valuta);
+            valutaMap.set(account.valuta, value + account.rubBalance);
+        });
+
+        const labels = [],
+        values = [];
+
+        valutaMap.forEach((value, key, map) => {
+            labels.push(key);
+            values.push(value);
         });
         
         const data = { 
@@ -29,10 +40,11 @@ class AccountChart extends Component {
     };
 }
 
+
 function mapStateToProps (state) {
     return {
         accounts: state.accounts,
     }
 }
 
-export default connect(mapStateToProps)(AccountChart);
+export default connect(mapStateToProps)(ValutaChart);

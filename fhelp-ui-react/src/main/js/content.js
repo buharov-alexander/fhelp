@@ -1,11 +1,13 @@
 'use strict';
 
 import React, {Component} from 'react';
-import AccountTable from './accountTable';
-import {AccountChart, ValutaChart} from './accountChart';
-import ValutesRate from './valutesRate';
 import {PageHeader, Grid, Row, Col, Button} from 'react-bootstrap';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import AccountTable from './accountTable';
+import AccountChart from './accountChart';
+import ValutaChart from './valutaChart';
+import ValutesRate from './valutesRate';
+import NewAccount from './newAccount';
 
 class Content  extends Component {
     render() {
@@ -15,13 +17,12 @@ class Content  extends Component {
                 <Grid>
                     <Row className="show-grid">
                         <Col md={8}>
-                            <AccountTable accounts={this.props.accounts}/>
-                            <Button bsStyle="primary">+</Button>
+                            <AccountTable />
                         </Col>
                         <Col md={4}>
-                            <ValutesRate rates={this.props.rates}/>
-                            <AccountChart accounts={this.props.accounts}/>
-                            <ValutaChart accounts={this.props.accounts}/>
+                            <ValutesRate />
+                            <AccountChart />
+                            <ValutaChart />
                         </Col>
                     </Row>
                 </Grid>
@@ -29,11 +30,4 @@ class Content  extends Component {
     }
 }
 
-function mapStateToProps (state) {
-    return {
-        accounts: state.accounts,
-        rates: state.rates
-    }
-}
-
-export default connect(mapStateToProps)(Content);
+export default Content;
