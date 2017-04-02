@@ -1,6 +1,9 @@
 'use strict';
 
 const options = {
+    legend: {
+        position: "right"
+    },
     tooltips: {
         callbacks: {
             label: function(tooltipItem, data) {
@@ -24,7 +27,11 @@ const colorSet = [
     '#5bc0de',
     '#ec971f',
     '#d9534f',
-    '#FF7733'
+    '#FF7733',
+    '#746D75',
+    '#8C4843',
+    '#9E643C',
+    '#8ACDEA'
 ];
 
 function generateColors(length) {

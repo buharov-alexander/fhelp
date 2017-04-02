@@ -5,7 +5,6 @@ import {PageHeader, Grid, Row, Col, Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import AccountTable from './accountTable';
 import AccountChart from './accountChart';
-import ValutaChart from './valutaChart';
 import ValutesRate from './valutesRate';
 import NewAccount from './newAccount';
 
@@ -21,8 +20,14 @@ class Content  extends Component {
                         </Col>
                         <Col md={4}>
                             <ValutesRate />
-                            <AccountChart />
-                            <ValutaChart />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <AccountChart propertyForGrouping={account => account.type} />
+                        </Col>
+                        <Col md={6}>
+                            <AccountChart propertyForGrouping={account => account.valuta} />
                         </Col>
                     </Row>
                 </Grid>

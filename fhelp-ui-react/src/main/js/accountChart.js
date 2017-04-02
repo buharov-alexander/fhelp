@@ -7,13 +7,21 @@ import {options, generateColors} from './chartOptions'
 
 class AccountChart extends Component {
     render() {
-        const labels = [],
-        values = [],
-        colors = generateColors(this.props.accounts.length);
+        const colors = generateColors(this.props.accounts.length);
 
+        const typeMap = new Map();
         this.props.accounts.forEach(account => {
-            labels.push(account.name);
-            values.push(account.rubBalance);
+            const property = this.props.propertyForGrouping(account);
+            const value = typeMap.get(property) || 0;
+            typeMap.set(property, value + account.rubBalance);
+        });
+        
+        const labels = [],
+        values = [];
+
+        typeMap.forEach((value, key, map) => {
+            labels.push(key);
+            values.push(value);
         });
         
         const data = { 
