@@ -1,15 +1,28 @@
 'use strict';
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import client from './client';
+import actionMiddleware from './actionMiddleware'
+
+const createStoreWithMiddleware = applyMiddleware(actionMiddleware)(createStore);
 
 function configureStore() {
-    return createStore(storeReducer, {accounts: [], rates: {}});;
+    return createStoreWithMiddleware(storeReducer, {
+        accounts: [],
+        rates: {},
+        isVisibleNewAccountPanel: false
+    });;
 }
 
-function storeReducer(state = [], action) {
+function storeReducer(state = {}, action) {
     if (action.type === "LOAD_DATA") {
-        return action.payload;
+        return Object.assign({}, state, action.payload);
+    } else if (action.type === 'SET_VISIBILITY_NEW_ACCOUNT_PANEL') {
+        return Object.assign({}, state, {isVisibleNewAccountPanel: action.payload});
+    } else if (action.type === 'ADD_ACCOUNT') {
+        const newAccount = calculateRubleEquivalent(action.payload, state.rates);
+        const newAccounts = state.accounts.concat(newAccount);
+        return Object.assign({}, state, {accounts: newAccounts});
     }
     return state;
 }

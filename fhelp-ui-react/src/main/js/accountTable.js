@@ -7,7 +7,7 @@ import {Table} from 'react-bootstrap';
 class AccountTable extends Component {
     render() {
         const accounts = this.props.accounts.map(account =>
-            <Account key={account._links.self.href} account={account}/>
+            <Account key={account.name} account={account}/>
         );
 
         let total = 0;

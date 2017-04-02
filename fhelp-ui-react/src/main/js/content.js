@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import AccountTable from './accountTable';
 import AccountChart from './accountChart';
 import ValutesRate from './valutesRate';
-import NewAccount from './newAccount';
+import NewAccountPanel from './newAccountPanel';
 
 class Content  extends Component {
     render() {
@@ -17,6 +17,7 @@ class Content  extends Component {
                     <Row className="show-grid">
                         <Col md={8}>
                             <AccountTable />
+                            <NewAccountPanel />
                         </Col>
                         <Col md={4}>
                             <ValutesRate />
