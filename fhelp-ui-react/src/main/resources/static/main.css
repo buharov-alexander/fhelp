@@ -1,9 +1,11 @@
-table {
-    border-collapse: collapse;
+td, th {
+    text-align: left;
 }
 
-td, th {
-    border: 1px solid #999;
-    padding: 0.5rem;
-    text-align: left;
+#borderless{
+    border: none;
+}
+
+.pageHeader{
+	padding-left: 15px;
 }
