@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {PageHeader, Grid, Row, Col, Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import AccountTable from './accountTable';
-import AccountChart from './accountChart';
+import AccountChart from '../chart/accountChart';
 import ValutesRate from './valutesRate';
 import NewAccountPanel from './newAccountPanel';
 
@@ -32,6 +32,12 @@ class Content  extends Component {
                         </Col>
                     </Row>
                 </Grid>
+
+                { /* Latest compiled and minified CSS */ }
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
+
+                { /* Optional theme */ }
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css" />
             </div> );
     }
 }

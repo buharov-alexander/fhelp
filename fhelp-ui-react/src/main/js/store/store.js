@@ -1,7 +1,7 @@
 'use strict';
 
 import {createStore, applyMiddleware} from 'redux';
-import client from './client';
+import client from '../api/client';
 import actionMiddleware from './actionMiddleware'
 
 const createStoreWithMiddleware = applyMiddleware(actionMiddleware)(createStore);

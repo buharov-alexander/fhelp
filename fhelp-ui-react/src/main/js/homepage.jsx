@@ -3,8 +3,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import Content from './content';
-import {configureStore, loadData} from './store.js';
+import Content from './bootstrap/content';
+import {configureStore, loadData} from './store/store.js';
 
 const store = configureStore();
 loadData(store);
