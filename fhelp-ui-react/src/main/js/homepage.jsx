@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import Content from './bootstrap/content';
+import Content from './material/content';
 import {configureStore, loadData} from './store/store.js';
 
 const store = configureStore();

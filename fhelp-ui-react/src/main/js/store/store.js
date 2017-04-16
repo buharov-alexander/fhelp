@@ -10,7 +10,8 @@ function configureStore() {
     return createStoreWithMiddleware(storeReducer, {
         accounts: [],
         rates: {},
-        isVisibleNewAccountPanel: false
+        isVisibleNewAccountPanel: false,
+        isDrawerOpened: false
     });;
 }
 
@@ -19,6 +20,8 @@ function storeReducer(state = {}, action) {
         return Object.assign({}, state, action.payload);
     } else if (action.type === 'SET_VISIBILITY_NEW_ACCOUNT_PANEL') {
         return Object.assign({}, state, {isVisibleNewAccountPanel: action.payload});
+    } else if (action.type === 'SET_DRAWER_STATE') {
+        return Object.assign({}, state, {isDrawerOpened: action.payload});
     } else if (action.type === 'ADD_ACCOUNT') {
         const newAccount = calculateRubleEquivalent(action.payload, state.rates);
         const newAccounts = state.accounts.concat(newAccount);
