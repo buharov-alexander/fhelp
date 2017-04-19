@@ -10,6 +10,7 @@ function configureStore() {
     return createStoreWithMiddleware(storeReducer, {
         accounts: [],
         rates: {},
+        indicators: [],
         isVisibleNewAccountPanel: false,
         isDrawerOpened: false
     });;
@@ -26,6 +27,8 @@ function storeReducer(state = {}, action) {
         const newAccount = calculateRubleEquivalent(action.payload, state.rates);
         const newAccounts = state.accounts.concat(newAccount);
         return Object.assign({}, state, {accounts: newAccounts});
+    } else if (action.type === 'LOAD_INDICATORS') {
+        return Object.assign({}, state, {indicators: action.payload});
     }
     return state;
 }
@@ -41,6 +44,11 @@ function loadData(store) {
             data.accounts = accounts;
             store.dispatch({ type: "LOAD_DATA", payload: data});
         });
+
+    client({method: 'GET', path: '/fhelp/rbc/indicators'}).then(response => {
+        const indicators = response.entity;
+        store.dispatch({ type: "LOAD_INDICATORS", payload: indicators});
+    });
 }
 
 function calculateRubleEquivalent(account, rates) {
