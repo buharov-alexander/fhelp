@@ -16,7 +16,7 @@ class AccountTable extends Component {
         });
         return (
             <Table>
-                <TableHeader adjustForCheckbox={true} displaySelectAll={false}>
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                     <TableRow>
                         <TableHeaderColumn>Name</TableHeaderColumn>
                         <TableHeaderColumn>Type</TableHeaderColumn>
@@ -25,16 +25,14 @@ class AccountTable extends Component {
                         <TableHeaderColumn>Ruble balance</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody displayRowCheckbox={false}>
                     {accounts}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TableRowColumn id="borderless" colSpan="3"></TableRowColumn>
+                    <TableRow className="boldText" >
+                        <TableRowColumn colSpan="3"></TableRowColumn>
                         <TableRowColumn>Total:</TableRowColumn>
-                        <TableHeaderColumn>{total}</TableHeaderColumn>
+                        <TableRowColumn>{total}</TableRowColumn>
                     </TableRow>
-                </TableFooter>
+                </TableBody>
             </Table>
         );
     }
@@ -45,7 +43,6 @@ class Account extends Component {
         const { account, ...otherProps } = this.props;
         return (
             <TableRow {...otherProps}>
-                {otherProps.children[0]}
                 <TableRowColumn>{account.name}</TableRowColumn>
                 <TableRowColumn>{account.type}</TableRowColumn>
                 <TableRowColumn>{account.valuta}</TableRowColumn>

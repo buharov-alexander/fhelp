@@ -1,0 +1,8 @@
+.indicatorPaper, .accountTablePaper {
+    margin: 10px;
+    padding: 10px;
+}
+
+.boldText {
+    font-weight: bold;
+}

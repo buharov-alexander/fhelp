@@ -32,7 +32,7 @@ class IndicatorTable extends Component {
 class IndicatorName extends Component {
     render() {
         return (
-            <TableRowColumn>
+            <TableRowColumn className="boldText">
                 {this.props.indicator.name}
             </TableRowColumn>
         );
@@ -40,10 +40,20 @@ class IndicatorName extends Component {
 }
 
 class IndicatorValue extends Component {
+    getColor(change) {
+        if (change && change.charAt(0) == '-') {
+            return "red";    
+        }
+        return "green";
+    }
+
     render() {
+        const change = this.props.indicator.change;
         return (
             <TableRowColumn>
                 {this.props.indicator.value}
+                <br/>
+                <span style={{"color": this.getColor(change)}}>{change}</span>
             </TableRowColumn>
         );
     }
