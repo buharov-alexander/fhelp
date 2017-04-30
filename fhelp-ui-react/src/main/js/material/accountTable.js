@@ -55,7 +55,7 @@ class Account extends Component {
 
 function mapStateToProps (state) {
     return {
-        accounts: state.accounts,
+        accounts: state.data.accounts,
     }
 }
 

@@ -2,36 +2,15 @@
 
 import {createStore, applyMiddleware} from 'redux';
 import client from '../api/client';
-import actionMiddleware from './actionMiddleware'
+import actionMiddleware from './actionMiddleware';
+import combineReducer from './combineReducer';
 
 const createStoreWithMiddleware = applyMiddleware(actionMiddleware)(createStore);
 
 function configureStore() {
-    return createStoreWithMiddleware(storeReducer, {
-        accounts: [],
-        rates: {},
-        indicators: [],
-        isVisibleNewAccountPanel: false,
-        isDrawerOpened: false
-    });;
+    return createStoreWithMiddleware(combineReducer);
 }
 
-function storeReducer(state = {}, action) {
-    if (action.type === "LOAD_DATA") {
-        return Object.assign({}, state, action.payload);
-    } else if (action.type === 'SET_VISIBILITY_NEW_ACCOUNT_PANEL') {
-        return Object.assign({}, state, {isVisibleNewAccountPanel: action.payload});
-    } else if (action.type === 'SET_DRAWER_STATE') {
-        return Object.assign({}, state, {isDrawerOpened: action.payload});
-    } else if (action.type === 'ADD_ACCOUNT') {
-        const newAccount = calculateRubleEquivalent(action.payload, state.rates);
-        const newAccounts = state.accounts.concat(newAccount);
-        return Object.assign({}, state, {accounts: newAccounts});
-    } else if (action.type === 'LOAD_INDICATORS') {
-        return Object.assign({}, state, {indicators: action.payload});
-    }
-    return state;
-}
 
 function loadData(store) {
     const data = {};
@@ -54,10 +33,10 @@ function loadData(store) {
 function calculateRubleEquivalent(account, rates) {
     switch(account.valuta) {
         case 'USD':
-            account.rubBalance = account.balance*rates.USD;
+            account.rubBalance = Math.round(account.balance*rates.USD*10)/10;
             break;
         case 'EUR':
-            account.rubBalance = account.balance*rates.EUR;
+            account.rubBalance = Math.round(account.balance*rates.EUR*10)/10;
             break;
         default:
             account.rubBalance = account.balance;

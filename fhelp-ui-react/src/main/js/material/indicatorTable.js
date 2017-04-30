@@ -62,7 +62,7 @@ class IndicatorValue extends Component {
 
 function mapStateToProps (state) {
     return {
-        indicators: state.indicators,
+        indicators: state.data.indicators,
     }
 }
 

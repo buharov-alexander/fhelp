@@ -38,7 +38,7 @@ class AppFrame extends Component {
 
 function mapStateToProps (state) {
     return {
-        isDrawerOpened: state.isDrawerOpened
+        isDrawerOpened: state.ui.isDrawerOpened
     }
 }
 
