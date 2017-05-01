@@ -16,23 +16,25 @@ class AccountTable extends Component {
         });
         return (
             <Table>
-                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                <TableHeader adjustForCheckbox={true} displaySelectAll={false}>
                     <TableRow>
-                        <TableHeaderColumn>Name</TableHeaderColumn>
-                        <TableHeaderColumn>Type</TableHeaderColumn>
-                        <TableHeaderColumn>Valuta</TableHeaderColumn>
-                        <TableHeaderColumn>Balance</TableHeaderColumn>
-                        <TableHeaderColumn>Ruble balance</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Account name">Name</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Account type">Type</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Valuta">Valuta</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Current balance">Balance</TableHeaderColumn>
+                        <TableHeaderColumn tooltip="Current balance in rubles">Ruble balance</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={false}>
+                <TableBody displayRowCheckbox={true} stripedRows={true}>
                     {accounts}
-                    <TableRow className="boldText" >
+                </TableBody>
+                <TableFooter>
+                    <TableRow className="boldText" selectable={false} style={{verticalAlign: 'middle'}}>
                         <TableRowColumn colSpan="3"></TableRowColumn>
                         <TableRowColumn>Total:</TableRowColumn>
                         <TableRowColumn>{total}</TableRowColumn>
                     </TableRow>
-                </TableBody>
+                </TableFooter>
             </Table>
         );
     }
@@ -43,6 +45,7 @@ class Account extends Component {
         const { account, ...otherProps } = this.props;
         return (
             <TableRow {...otherProps}>
+                {otherProps.children[0]}
                 <TableRowColumn>{account.name}</TableRowColumn>
                 <TableRowColumn>{account.type}</TableRowColumn>
                 <TableRowColumn>{account.valuta}</TableRowColumn>

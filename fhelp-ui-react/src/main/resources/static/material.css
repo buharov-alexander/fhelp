@@ -3,6 +3,10 @@
     padding: 10px;
 }
 
+.button {
+    margin: 10px;
+}
+
 .boldText {
     font-weight: bold;
 }
