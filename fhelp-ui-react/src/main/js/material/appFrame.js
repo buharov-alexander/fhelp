@@ -1,33 +1,45 @@
 'use strict';
 
 import React, {Component} from 'react';
-import Overview from './overview';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import Overview from './overview';
+import NewAccountPage from './newAccount';
+import {withRouter} from 'react-router-dom'
+
 
 class AppFrame extends Component {
 
     changeDrawerState() {
-        this.props.setDrawerOpened(!this.props.isDrawerOpened);
+        this.props.actions.setDrawerOpened(!this.props.isDrawerOpened);
+    }
+
+    chooseSection(path) {
+        this.props.actions.goTo(path);
+        this.props.actions.setDrawerOpened(false);
     }
 
     render() {
         return (
-        <Router >
             <div>
-                <AppBar title="Financial helper" onLeftIconButtonTouchTap={this.changeDrawerState.bind(this)} />
-                <Drawer Drawer docked={false} open={this.props.isDrawerOpened} onRequestChange={(open) => this.props.setDrawerOpened(open)} >
-                    <MenuItem>Menu Item</MenuItem>
-                    <MenuItem>Menu Item 2</MenuItem>
+                <AppBar title="Financial helper" onLeftIconButtonTouchTap={() => this.changeDrawerState()} />
+                <Drawer Drawer docked={false} open={this.props.isDrawerOpened} onRequestChange={(open) => this.props.actions.setDrawerOpened(open)} >
+                    <MenuItem onTouchTap={() => this.chooseSection("/fhelp/home")}>
+                        Overview
+                    </MenuItem>
+                    <MenuItem onTouchTap={() => this.chooseSection("/fhelp/newAccount")}>
+                        Create account
+                    </MenuItem>
                 </Drawer>
                 <Route exact path="/fhelp/home" component={Overview} />
+                <Route exact path="/fhelp/newAccount" component={NewAccountPage} />
 
                 <link rel="stylesheet" href="../material.css" />
             </div>
-        </Router>
         );
     }
 }
@@ -40,8 +52,11 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setDrawerOpened: (isDrawerOpened) => {dispatch({type: 'SET_DRAWER_STATE', payload: isDrawerOpened})}
+    actions: {
+        setDrawerOpened: (isDrawerOpened) => {dispatch({type: 'SET_DRAWER_STATE', payload: isDrawerOpened})},
+        goTo: (path) => {dispatch(push(path))}
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppFrame);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppFrame));

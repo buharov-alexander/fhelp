@@ -5,20 +5,21 @@ import AccountTable from './accountTable';
 import IndicatorTable from './indicatorTable';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import NavigationButton from './navigationButton';
 
-class Overview extends Component {
+class Overview extends React.PureComponent {
 
     render() {
         return (
         <div>
-            <Paper className="indicatorPaper" zDepth={2}>
+            <Paper className="paper" zDepth={2}>
                 <IndicatorTable />
             </Paper>
-            <Paper className="accountTablePaper" zDepth={2}>
+            <Paper className="paper" zDepth={2}>
                 <AccountTable />
             </Paper>
 
-            <RaisedButton className="button" label="New" primary={true} />
+            <NavigationButton className="button" label="New" path="/fhelp/newAccount"/>
             <RaisedButton className="button" label="Delete" secondary={true} />
         </div>);
     }
