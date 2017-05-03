@@ -1,6 +1,6 @@
 'use strict';
 
-import client from './client';
+import client from '../api/client';
 
 export default store => next => action => {
     console.log('In middleware', action);
