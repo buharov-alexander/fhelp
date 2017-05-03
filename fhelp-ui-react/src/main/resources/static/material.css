@@ -3,9 +3,10 @@
     padding: 10px;
 }
 
-.button {
+.button, .formField {
     margin: 10px;
 }
+
 
 .boldText {
     font-weight: bold;

@@ -8,8 +8,8 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Overview from './overview';
-import NewAccountPage from './newAccount';
-import {withRouter} from 'react-router-dom'
+import NewAccountPage from './newAccountPage';
+import {withRouter} from 'react-router-dom';
 
 
 class AppFrame extends Component {

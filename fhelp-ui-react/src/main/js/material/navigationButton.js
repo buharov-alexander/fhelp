@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
@@ -28,4 +27,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(NavigationButton));
+export default connect(null, mapDispatchToProps)(NavigationButton);
