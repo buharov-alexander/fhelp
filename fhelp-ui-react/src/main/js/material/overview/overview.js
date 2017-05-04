@@ -6,7 +6,7 @@ import AccountTable from './accountTable';
 import IndicatorTable from './indicatorTable';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import NavigationButton from './navigationButton';
+import NavigationButton from '../navigationButton';
 
 class Overview extends React.PureComponent {
 

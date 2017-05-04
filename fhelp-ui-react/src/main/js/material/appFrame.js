@@ -7,8 +7,8 @@ import {push} from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import Overview from './overview';
-import NewAccountPage from './newAccountPage';
+import Overview from './overview/overview';
+import NewAccountPage from './creatingaccount/newAccountPage';
 import {withRouter} from 'react-router-dom';
 
 
