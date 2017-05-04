@@ -3,9 +3,13 @@
 const initialState = {accounts: [], indicators: []};
 
 export default function dataReducer(state = initialState, action) {
-    if (action.type === 'ADD_ACCOUNT') {
+    if (action.type === 'ADD_ACCOUNT_SUCCESS') {
         const newAccount = updateRubleEquivalent(action.payload, state);
         const newAccounts = state.accounts.concat(newAccount);
+        return Object.assign({}, state, {accounts: newAccounts});
+    } else if (action.type === 'DELETE_ACCOUNT_SUCCESS') {
+        const newAccounts = state.accounts.filter(account => 
+            account.id != action.payload);
         return Object.assign({}, state, {accounts: newAccounts});
     } else if (action.type === "LOAD_ACCOUNTS") {
         const accounts = action.payload.map(account =>
