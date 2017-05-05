@@ -33,7 +33,7 @@ class Overview extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        currentAccountId: state.ui.currentAccountId,
+        currentAccountId: state.ui.currentAccountId
     }
 }
 
