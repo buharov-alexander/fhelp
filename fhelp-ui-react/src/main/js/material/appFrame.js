@@ -4,12 +4,13 @@ import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import {withRouter} from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import Overview from './overview';
-import NewAccountPage from './newAccountPage';
-import {withRouter} from 'react-router-dom';
+import Overview from './overview/overview';
+import NewAccountPage from './creatingaccount/newAccountPage';
+import AccountDetailsPage from './accountdetails/accountDetailsPage';
 
 
 class AppFrame extends Component {
@@ -34,9 +35,13 @@ class AppFrame extends Component {
                     <MenuItem onTouchTap={() => this.chooseSection("/fhelp/newAccount")}>
                         Create account
                     </MenuItem>
+                    <MenuItem onTouchTap={() => this.chooseSection("/fhelp/accountDetails")}>
+                        Account details
+                    </MenuItem>
                 </Drawer>
                 <Route exact path="/fhelp/home" component={Overview} />
                 <Route exact path="/fhelp/newAccount" component={NewAccountPage} />
+                <Route exact path="/fhelp/accountDetails" component={AccountDetailsPage} />
 
                 <link rel="stylesheet" href="../material.css" />
             </div>

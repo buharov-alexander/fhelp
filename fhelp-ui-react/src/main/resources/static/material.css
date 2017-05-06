@@ -7,6 +7,19 @@
     margin: 10px;
 }
 
+.contentColumn {
+    display: inline-block;
+    vertical-align:top;
+}
+
+.rowList {
+    display: flex;
+    flexDirection: row;
+}
+
+.rowList div {
+    width: 100%;
+}
 
 .boldText {
     font-weight: bold;

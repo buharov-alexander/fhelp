@@ -6,12 +6,7 @@ import {connect} from 'react-redux';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {SelectField,  TextField} from 'redux-form-material-ui';
-
-const required = value => (value == null ? 'Required' : undefined);
-const isNumber = value =>
-  (value && !isNaN(parseFloat(value)) && isFinite(value)
-    ? undefined
-    : 'Invalid number');
+import {required, isNumber} from '../util/formValidator';
 
 class NewAccountForm extends Component {
 
@@ -27,7 +22,7 @@ class NewAccountForm extends Component {
     }
 
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit, valid} = this.props;
         return (
             <form onSubmit={handleSubmit(this.createAccount.bind(this))}>
                 <div>
@@ -76,7 +71,7 @@ class NewAccountForm extends Component {
                     <RaisedButton
                     className="button"
                     type="submit"
-                    disabled={false}
+                    disabled={!valid}
                     label="Create"
                     primary={true}
                     />

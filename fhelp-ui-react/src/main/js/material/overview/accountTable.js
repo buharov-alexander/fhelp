@@ -5,17 +5,28 @@ import {connect} from 'react-redux';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 class AccountTable extends Component {
+    
+    handleSelect(indexes) {
+        const accountId = indexes[0] ? this.props.accounts[indexes[0]].id : undefined;
+        this.props.actions.setCurrentAccount(accountId);
+    }
+
+    componentWillUnmount() {
+        this.props.actions.setCurrentAccount(undefined);   
+    }
+
     render() {
         const accounts = this.props.accounts.map(account =>
-            <Account key={account.name} account={account}/>
+            <Account key={account.id} account={account}/>
         );
 
         let total = 0;
         this.props.accounts.forEach(account => {
             total+=account.rubBalance;
         });
+        total = Math.round(total*10)/10;
         return (
-            <Table>
+            <Table onRowSelection={this.handleSelect.bind(this)}>
                 <TableHeader adjustForCheckbox={true} displaySelectAll={false}>
                     <TableRow>
                         <TableHeaderColumn tooltip="Account name">Name</TableHeaderColumn>
@@ -56,10 +67,18 @@ class Account extends Component {
     }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
-        accounts: state.data.accounts,
+        accounts: state.data.accounts
     }
 }
 
-export default connect(mapStateToProps)(AccountTable);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+        setCurrentAccount: (account) => {dispatch({type: 'SET_CURRENT_ACCOUNT', payload: account})},
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);

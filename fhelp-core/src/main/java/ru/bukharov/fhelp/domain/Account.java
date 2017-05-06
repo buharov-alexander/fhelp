@@ -1,5 +1,8 @@
 package ru.bukharov.fhelp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,7 +30,8 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private ValutaEnum valuta;
 
-    @OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AccountState> states;
 
     public Account() {
