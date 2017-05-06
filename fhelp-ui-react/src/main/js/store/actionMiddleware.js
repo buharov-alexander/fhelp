@@ -6,7 +6,7 @@ export default store => next => action => {
 	console.log(action);
     if (action.type === 'ADD_ACCOUNT') {
         client({method: 'POST',
-            path: 'http://localhost:8080/fhelp/data/accounts', 
+            path: 'http://localhost:8080/fhelp/account', 
             entity: action.payload, 
             headers: {'Content-Type': 'application/json'}}).then(response => {
             	store.dispatch({type: 'ADD_ACCOUNT_SUCCESS', payload: response.entity});
@@ -18,7 +18,7 @@ export default store => next => action => {
             }); 
     } else if (action.type === 'ADD_ACCOUNT_STATE') {
         client({method: 'POST',
-            path: 'http://localhost:8080/fhelp/data/accountStates', 
+            path: 'http://localhost:8080/fhelp/account/state', 
             entity: action.payload, 
             headers: {'Content-Type': 'application/json'}}).then(response => {
                 store.dispatch({type: 'ADD_ACCOUNT_STATE_SUCCESS', payload: response.entity});
