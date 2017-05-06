@@ -16,6 +16,13 @@ export default store => next => action => {
             path: 'http://localhost:8080/fhelp/data/accounts/' + action.payload}).then(response => {
             	store.dispatch({type: 'DELETE_ACCOUNT_SUCCESS', payload: action.payload});
             }); 
+    } else if (action.type === 'ADD_ACCOUNT_STATE') {
+        client({method: 'POST',
+            path: 'http://localhost:8080/fhelp/data/accountStates', 
+            entity: action.payload, 
+            headers: {'Content-Type': 'application/json'}}).then(response => {
+                store.dispatch({type: 'ADD_ACCOUNT_STATE_SUCCESS', payload: response.entity});
+            });
     }
     return next(action);
 }
