@@ -11,7 +11,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Overview from './overview/overview';
 import NewAccountPage from './creatingaccount/newAccountPage';
 import AccountDetailsPage from './accountdetails/accountDetailsPage';
-
+import Dashboard from './dashboard/dashboard';
 
 class AppFrame extends Component {
 
@@ -38,10 +38,14 @@ class AppFrame extends Component {
                     <MenuItem onTouchTap={() => this.chooseSection("/fhelp/accountDetails")}>
                         Account details
                     </MenuItem>
+                    <MenuItem onTouchTap={() => this.chooseSection("/fhelp/dashboard")}>
+                        Dashboard
+                    </MenuItem>
                 </Drawer>
                 <Route exact path="/fhelp/home" component={Overview} />
                 <Route exact path="/fhelp/newAccount" component={NewAccountPage} />
                 <Route exact path="/fhelp/accountDetails" component={AccountDetailsPage} />
+                <Route exact path="/fhelp/dashboard" component={Dashboard} />
 
                 <link rel="stylesheet" href="../material.css" />
             </div>
