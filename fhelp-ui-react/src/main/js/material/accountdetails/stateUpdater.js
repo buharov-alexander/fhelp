@@ -32,6 +32,7 @@ class StateUpdater extends Component {
                             className="formField"
                             name="date"
                             floatingLabelText="Date"
+                            maxDate={new Date()}
                             validate={required}
                             format={(value, name) => value === '' ? null : value}
                             component={DatePicker}/>
