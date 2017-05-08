@@ -4,7 +4,7 @@ const initialState = {accounts: [], indicators: []};
 
 export default function dataReducer(state = initialState, action) {
     if (action.type === 'ADD_ACCOUNT_SUCCESS') {
-        const newAccount = updateRubleEquivalent(action.payload, state);
+        const newAccount = balanceFormat(action.payload, state);
         const newAccounts = state.accounts.concat(newAccount);
         return Object.assign({}, state, {accounts: newAccounts});
     } else if (action.type === 'DELETE_ACCOUNT_SUCCESS') {
@@ -13,19 +13,26 @@ export default function dataReducer(state = initialState, action) {
         return Object.assign({}, state, {accounts: newAccounts});
     } else if (action.type === "LOAD_ACCOUNTS") {
         const accounts = action.payload.map(account =>
-            updateRubleEquivalent(account, state));
+            balanceFormat(account, state));
         return Object.assign({}, state, {accounts: accounts});
     } else if (action.type === 'LOAD_INDICATORS') {
         return Object.assign({}, state, {indicators: action.payload});
+    } else if (action.type === 'UPDATE_ACCOUNT') {
+        const updatedAccount = balanceFormat(action.payload, state);
+        const newAccounts = state.accounts.map(account => {
+            return account.id == updatedAccount.id ? updatedAccount : account;
+        });
+        return Object.assign({}, state, {accounts: newAccounts});
     }
 
     return state;
 }
 
 
-function updateRubleEquivalent(account, state) {
+function balanceFormat(account, state) {
     const indicatorValue = getIndicatorValue(state, account.valuta) || 1;
     account.rubBalance = Math.round(account.balance*indicatorValue*10)/10;
+    account.balance = Math.round(account.balance*10)/10;
     return account;
 }
 

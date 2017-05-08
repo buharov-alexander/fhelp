@@ -23,9 +23,9 @@ function loadData(store) {
     client({method: 'GET', path: '/fhelp/rbc/indicators'}).then(response => {
         const indicators = response.entity;
         store.dispatch({ type: "LOAD_INDICATORS", payload: indicators});
-        return client({method: 'GET', path: '/fhelp/data/accounts'});
+        return client({method: 'GET', path: '/fhelp/account'});
     }).then(response => {
-        store.dispatch({ type: "LOAD_ACCOUNTS", payload: response.entity._embedded.accounts});
+        store.dispatch({ type: "LOAD_ACCOUNTS", payload: response.entity});
     });
 }
 
