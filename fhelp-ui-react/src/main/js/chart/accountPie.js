@@ -21,7 +21,7 @@ class AccountPie extends Component {
 
         typeMap.forEach((value, key, map) => {
             labels.push(key);
-            values.push(value);
+            values.push(Math.round(value*10)/10);
         });
         
         const data = { 
