@@ -17,6 +17,7 @@ class AccountTable extends Component {
 			const firstAccountId = this.props.accounts[0].id;
 			this.props.actions.setCurrentAccount(firstAccountId);
         }
+        this.props.actions.loadAccount();
     }
 
     componentWillUnmount() {
@@ -49,6 +50,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
         setCurrentAccount: (account) => {dispatch({type: 'SET_CURRENT_ACCOUNT', payload: account})},
+        loadAccount: () => {dispatch({type: 'LOAD_ACCOUNTS'});}
     }
   }
 }

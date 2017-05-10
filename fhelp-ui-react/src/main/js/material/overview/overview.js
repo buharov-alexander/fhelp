@@ -14,6 +14,10 @@ class Overview extends React.PureComponent {
         this.props.actions.deleteAccount(this.props.currentAccountId);
     }
 
+    componentDidMount() {
+        this.props.actions.loadAccount();
+    }
+
     render() {
         return (
         <div>
@@ -40,7 +44,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-        deleteAccount: (id) => {dispatch({type: 'DELETE_ACCOUNT', payload: id})},
+        deleteAccount: (id) => {dispatch({type: 'DELETE_ACCOUNT', payload: id});},
+        loadAccount: () => {dispatch({type: 'LOAD_ACCOUNTS'});}
     }
   }
 }

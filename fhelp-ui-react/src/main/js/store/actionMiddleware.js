@@ -29,6 +29,14 @@ export default store => next => action => {
                     }).then(response => {
                         store.dispatch({ type: "UPDATE_ACCOUNT", payload: response.entity});
         });
+    } else if (action.type === 'LOAD_ACCOUNTS') {
+        client({method: 'GET', path: '/fhelp/rbc/indicators'}).then(response => {
+            const indicators = response.entity;
+            store.dispatch({ type: "LOAD_INDICATORS_SUCCESS", payload: indicators});
+            return client({method: 'GET', path: '/fhelp/account'});
+        }).then(response => {
+            store.dispatch({ type: "LOAD_ACCOUNTS_SUCCESS", payload: response.entity});
+        });
     }
     return next(action);
 }

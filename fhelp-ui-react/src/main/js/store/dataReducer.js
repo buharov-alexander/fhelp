@@ -11,11 +11,11 @@ export default function dataReducer(state = initialState, action) {
         const newAccounts = state.accounts.filter(account => 
             account.id != action.payload);
         return Object.assign({}, state, {accounts: newAccounts});
-    } else if (action.type === "LOAD_ACCOUNTS") {
+    } else if (action.type === "LOAD_ACCOUNTS_SUCCESS") {
         const accounts = action.payload.map(account =>
             balanceFormat(account, state));
         return Object.assign({}, state, {accounts: accounts});
-    } else if (action.type === 'LOAD_INDICATORS') {
+    } else if (action.type === 'LOAD_INDICATORS_SUCCESS') {
         return Object.assign({}, state, {indicators: action.payload});
     } else if (action.type === 'UPDATE_ACCOUNT') {
         const updatedAccount = balanceFormat(action.payload, state);
