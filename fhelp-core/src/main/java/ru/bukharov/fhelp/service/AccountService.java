@@ -45,6 +45,16 @@ public class AccountService {
         return createAccountDTO(account);
     }
 
+    public List<AccountStateDTO> getStatesByAccountId(Long accountId) {
+        List list = new ArrayList();
+        Account account = accountRepository.findOne(accountId);
+        for (AccountState state : account.getStates()) {
+            AccountStateDTO stateDTO = createAccountStateDTO(state);
+            list.add(stateDTO);
+        }
+        return list;
+    }
+
     @Transactional
     public AccountStateDTO saveAccountState(AccountStateDTO accountStateDTO) {
         new AccountStateDTOValidator().validate(accountStateDTO);
@@ -68,6 +78,16 @@ public class AccountService {
             list.add(accountDTO);
         }
         return list;
+    }
+
+    private AccountStateDTO createAccountStateDTO(AccountState accountState) {
+        AccountStateDTO accountStateDTO = new AccountStateDTO();
+        accountStateDTO.setId(accountState.getId());
+        accountStateDTO.setBalance(accountState.getBalance());
+        accountStateDTO.setDate(accountState.getDate());
+        accountStateDTO.setAccountId(accountState.getAccount().getId());
+
+        return accountStateDTO;
     }
 
     private Account createAccount(AccountDTO accountDTO) {

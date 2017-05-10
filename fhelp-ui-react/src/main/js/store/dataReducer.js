@@ -1,6 +1,6 @@
 'use strict';
 
-const initialState = {accounts: [], indicators: []};
+const initialState = {accounts: [], indicators: [], accountStates: {}};
 
 export default function dataReducer(state = initialState, action) {
     if (action.type === 'ADD_ACCOUNT_SUCCESS') {
@@ -23,6 +23,11 @@ export default function dataReducer(state = initialState, action) {
             return account.id == updatedAccount.id ? updatedAccount : account;
         });
         return Object.assign({}, state, {accounts: newAccounts});
+    } else if (action.type === 'LOAD_ACCOUNT_STATES_SUCCESS') {
+        const newState = {};
+        newState[action.payload.accountId] = action.payload.states;
+        const accountStates = Object.assign({}, state.accountStates, newState);
+        return Object.assign({}, state, {accountStates: accountStates});
     }
 
     return state;

@@ -36,6 +36,14 @@ public class AccountController {
         return accountDTO;
     }
 
+    @RequestMapping(value = "/stateList/{id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<AccountStateDTO> getStatesByAccountId(@PathVariable Long id) {
+        List<AccountStateDTO> list = accountService.getStatesByAccountId(id);
+        return list;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public
     @ResponseBody

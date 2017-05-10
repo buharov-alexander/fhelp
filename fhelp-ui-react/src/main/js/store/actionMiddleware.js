@@ -37,6 +37,12 @@ export default store => next => action => {
         }).then(response => {
             store.dispatch({ type: "LOAD_ACCOUNTS_SUCCESS", payload: response.entity});
         });
+    } else if (action.type === 'LOAD_ACCOUNT_STATES') {
+        const accountId = action.payload;
+        client({method: 'GET', path: '/fhelp/account/stateList/' + accountId}).then(response => {
+            store.dispatch({ type: "LOAD_ACCOUNT_STATES_SUCCESS", payload: {accountId: accountId, states: response.entity}});
+        });
     }
+
     return next(action);
 }

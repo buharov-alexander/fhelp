@@ -3,9 +3,18 @@ package ru.bukharov.fhelp.dto;
 import java.util.Date;
 
 public class AccountStateDTO {
+    private Long id;
     private Date date;
     private Double balance;
     private Long accountId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Date getDate() {
         return date;
