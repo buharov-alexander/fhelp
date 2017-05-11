@@ -18,11 +18,16 @@ export default function dataReducer(state = initialState, action) {
     } else if (action.type === 'LOAD_INDICATORS_SUCCESS') {
         return Object.assign({}, state, {indicators: action.payload});
     } else if (action.type === 'UPDATE_ACCOUNT') {
-        const updatedAccount = balanceFormat(action.payload, state);
+        let {states, ...updatedAccount} = action.payload;
+        updatedAccount = balanceFormat(updatedAccount, state);
+        const accountStates = Object.assign({}, state.accountStates);
+        accountStates[updatedAccount.id] = states;
+
         const newAccounts = state.accounts.map(account => {
             return account.id == updatedAccount.id ? updatedAccount : account;
         });
-        return Object.assign({}, state, {accounts: newAccounts});
+        const newState = Object.assign({}, state, {accounts: newAccounts}, {accountStates: accountStates});
+        return newState
     } else if (action.type === 'LOAD_ACCOUNT_STATES_SUCCESS') {
         const newState = {};
         newState[action.payload.accountId] = action.payload.states;

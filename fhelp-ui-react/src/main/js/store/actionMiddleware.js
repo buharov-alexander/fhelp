@@ -25,7 +25,7 @@ export default store => next => action => {
             entity: state, 
             headers: {'Content-Type': 'application/json'}}).then(response => {
                 store.dispatch({type: 'ADD_ACCOUNT_STATE_SUCCESS', payload: response.entity});
-                return client({method: 'GET', path: '/fhelp/account/' + state.accountId});
+                return client({method: 'GET', path: '/fhelp/account/accountWithStates/' + state.accountId});
                     }).then(response => {
                         store.dispatch({ type: "UPDATE_ACCOUNT", payload: response.entity});
         });

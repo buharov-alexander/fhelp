@@ -9,6 +9,7 @@ import ru.bukharov.fhelp.domain.Account;
 import ru.bukharov.fhelp.domain.AccountState;
 import ru.bukharov.fhelp.dto.AccountDTO;
 import ru.bukharov.fhelp.dto.AccountStateDTO;
+import ru.bukharov.fhelp.dto.AccountWithStatesDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +44,11 @@ public class AccountService {
     public AccountDTO getAccount(Long id) {
         Account account = accountRepository.findOne(id);
         return createAccountDTO(account);
+    }
+
+    public AccountWithStatesDTO getAccountWithStates(Long id) {
+        Account account = accountRepository.findOne(id);
+        return createAccountWithStatesDTO(account);
     }
 
     public List<AccountStateDTO> getStatesByAccountId(Long accountId) {
@@ -100,8 +106,23 @@ public class AccountService {
         return account;
     }
 
+    private AccountWithStatesDTO createAccountWithStatesDTO(Account account) {
+        AccountWithStatesDTO accountWithStatesDTO = new AccountWithStatesDTO();
+        fillAccountDTO(accountWithStatesDTO, account);
+        for (AccountState state : account.getStates()) {
+            AccountStateDTO stateDTO = createAccountStateDTO(state);
+            accountWithStatesDTO.getStates().add(stateDTO);
+        }
+        return accountWithStatesDTO;
+    }
+
     private AccountDTO createAccountDTO(Account account) {
         AccountDTO accountDTO = new AccountDTO();
+        fillAccountDTO(accountDTO, account);
+        return accountDTO;
+    }
+
+    private void fillAccountDTO(AccountDTO accountDTO, Account account) {
         accountDTO.setId(account.getId());
         accountDTO.setName(account.getName());
         accountDTO.setType(account.getType());
@@ -110,6 +131,5 @@ public class AccountService {
         List<AccountState> states = account.getStates();
         Double balance = states.isEmpty() ? 0 : states.get(0).getBalance();
         accountDTO.setBalance(balance);
-        return accountDTO;
     }
 }

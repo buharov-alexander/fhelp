@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.bukharov.fhelp.dto.AccountDTO;
 import ru.bukharov.fhelp.dto.AccountStateDTO;
+import ru.bukharov.fhelp.dto.AccountWithStatesDTO;
 import ru.bukharov.fhelp.service.AccountService;
 
 import java.util.List;
@@ -34,6 +35,14 @@ public class AccountController {
     AccountDTO getAccount(@PathVariable Long id) {
         AccountDTO accountDTO = accountService.getAccount(id);
         return accountDTO;
+    }
+
+    @RequestMapping(value = "/accountWithStates/{id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    AccountWithStatesDTO getAccountWithStates(@PathVariable Long id) {
+        AccountWithStatesDTO accountWithStatesDTO = accountService.getAccountWithStates(id);
+        return accountWithStatesDTO;
     }
 
     @RequestMapping(value = "/stateList/{id}", method = RequestMethod.GET)

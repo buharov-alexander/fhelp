@@ -26,6 +26,8 @@ class StateChart extends Component {
             coordinates = this.props.states.map(state => {
                 return {x:state.date , y: state.balance};
             });
+            coordinates.reverse();
+            coordinates.push({x: new Date(), y: this.props.states[0].balance});
         }
         
         const data = {

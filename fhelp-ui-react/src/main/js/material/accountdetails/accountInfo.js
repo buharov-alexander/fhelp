@@ -16,7 +16,7 @@ class AccountInfo extends Component {
                     <ListItem primaryText={account.name} secondaryText="Account name"/>
                     <ListItem primaryText={account.type} secondaryText="Type"/>
                     <ListItem primaryText={account.valuta} secondaryText="Valuta"/>
-                    <ListItem primaryText={account.balance} secondaryText="Balance"/>
+                    <ListItem primaryText={account.balance || '0'} secondaryText="Balance"/>
                 </List>
 
                 <div className="lineDiv">
