@@ -6,7 +6,7 @@ import {reduxForm, Field, reset} from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
 import {TextField, DatePicker} from 'redux-form-material-ui';
 import {required, isNumber} from '../util/formValidator';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 
 class StateUpdater extends Component {
     
@@ -23,39 +23,38 @@ class StateUpdater extends Component {
     render() {
         const {handleSubmit, valid} = this.props;
         return (
-            <Card>
-                <CardTitle title="Add account state"/>
-                <CardActions>
-                    <form onSubmit={handleSubmit(this.createNewState.bind(this))}>
-                        <div> 
-                            <Field 
-                            className="formField"
-                            name="date"
-                            floatingLabelText="Date"
-                            validate={required}
-                            format={(value, name) => value === '' ? null : value}
-                            component={DatePicker}/>
-                        </div>
-                        <div>
-                            <Field 
-                            className="formField"
-                            name="balance"
-                            floatingLabelText="Balance"
-                            validate={required, isNumber}
-                            component={TextField}/>
-                        </div>
-                        <div>
-                            <RaisedButton
-                            className="button"
-                            type="submit"
-                            disabled={!valid}
-                            label="Add state"
-                            primary={true}
-                            />
-                        </div>            
-                    </form>
-                </CardActions>
-            </Card>
+            <Paper className="paper contentColumn" style={{width: '40%'}}>
+                <h2>Add account state</h2>
+                <form onSubmit={handleSubmit(this.createNewState.bind(this))}>
+                    <div> 
+                        <Field 
+                        className="formField"
+                        name="date"
+                        floatingLabelText="Date"
+                        maxDate={new Date()}
+                        validate={required}
+                        format={(value, name) => value === '' ? null : value}
+                        component={DatePicker}/>
+                    </div>
+                    <div>
+                        <Field 
+                        className="formField"
+                        name="balance"
+                        floatingLabelText="Balance"
+                        validate={required, isNumber}
+                        component={TextField}/>
+                    </div>
+                    <div>
+                        <RaisedButton
+                        className="button"
+                        type="submit"
+                        disabled={!valid}
+                        label="Add state"
+                        primary={true}
+                        />
+                    </div>            
+                </form>
+            </Paper>
         );
     }
 }

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Pie} from 'react-chartjs-2';
 import {options, generateColors} from './chartOptions'
 
-class AccountChart extends Component {
+class AccountPie extends Component {
     render() {
         const colors = generateColors(this.props.accounts.length);
 
@@ -21,7 +21,7 @@ class AccountChart extends Component {
 
         typeMap.forEach((value, key, map) => {
             labels.push(key);
-            values.push(value);
+            values.push(Math.round(value*10)/10);
         });
         
         const data = { 
@@ -39,8 +39,8 @@ class AccountChart extends Component {
 
 function mapStateToProps (state) {
     return {
-        accounts: state.accounts,
+        accounts: state.data.accounts,
     }
 }
 
-export default connect(mapStateToProps)(AccountChart);
+export default connect(mapStateToProps)(AccountPie);

@@ -11,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -22,7 +24,6 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Double balance;
 
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum type;
@@ -31,10 +32,12 @@ public class Account {
     private ValutaEnum valuta;
 
     @JsonIgnore
+    @OrderBy("date DESC")
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AccountState> states;
+    private List<AccountState> states;
 
     public Account() {
+        this.states = new ArrayList<>();
     }
 
     public Long getId() {
@@ -61,11 +64,11 @@ public class Account {
         this.type = type;
     }
 
-    public Set<AccountState> getStates() {
+    public List<AccountState> getStates() {
         return states;
     }
 
-    public void setStates(Set<AccountState> states) {
+    public void setStates(List<AccountState> states) {
         this.states = states;
     }
 
@@ -75,13 +78,5 @@ public class Account {
 
     public void setValuta(ValutaEnum valuta) {
         this.valuta = valuta;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
     }
 }

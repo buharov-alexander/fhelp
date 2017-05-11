@@ -10,13 +10,17 @@ class AccountTable extends Component {
     
     handleSelect(event, id) {
         this.props.actions.setCurrentAccount(id);
+        if (id) {
+            this.props.actions.loadAccountStates(id);
+        }
     }
 
     componentDidMount() {
         if (!this.props.currentAccountId && this.props.accounts.length > 0) {
 			const firstAccountId = this.props.accounts[0].id;
-			this.props.actions.setCurrentAccount(firstAccountId);
+			this.handleSelect(null, firstAccountId);
         }
+        this.props.actions.loadAccount();
     }
 
     componentWillUnmount() {
@@ -48,7 +52,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-        setCurrentAccount: (account) => {dispatch({type: 'SET_CURRENT_ACCOUNT', payload: account})},
+        setCurrentAccount: (account) => {dispatch({type: 'SET_CURRENT_ACCOUNT', payload: account});},
+        loadAccount: () => {dispatch({type: 'LOAD_ACCOUNTS'});},
+        loadAccountStates: (accountId) => {dispatch({type: 'LOAD_ACCOUNT_STATES', payload: accountId});}
     }
   }
 }
