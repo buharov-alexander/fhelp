@@ -12,8 +12,7 @@ const options = {
             time: {
                 displayFormats: {
                     quarter: 'MMM YYYY'
-                },
-                max: new Date()
+                }
             }
         }]
     }
@@ -27,7 +26,9 @@ class StateChart extends Component {
                 return {x:state.date , y: state.balance};
             });
             coordinates.reverse();
-            coordinates.push({x: new Date(), y: this.props.states[0].balance});
+            const currentTime = new Date();
+            coordinates.push({x: currentTime, y: this.props.states[0].balance});
+            options.scales.xAxes[0].time.max = currentTime;
         }
         
         const data = {
