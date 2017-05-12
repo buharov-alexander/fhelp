@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bukharov.fhelp.json.JsonService;
-import ru.bukharov.fhelp.rbc.dto.Indicator;
+import ru.bukharov.fhelp.dto.IndicatorDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class RbcServiceImpl implements RbcService {
     private Logger log = LoggerFactory.getLogger(RbcServiceImpl.class);
 
     @Override
-    public List<Indicator> getIndicators() {
+    public List<IndicatorDTO> getIndicators() {
         try {
             JSONObject jsonObject = jsonService.getJsonFromUrl(RBC_INDICATOR_URL);
             return parseIndicatorsJson(jsonObject);
@@ -49,8 +49,8 @@ public class RbcServiceImpl implements RbcService {
 
     }
 
-    private List<Indicator> parseIndicatorsJson(JSONObject jsonObject) {
-        List<Indicator> indicators = new ArrayList<>();
+    private List<IndicatorDTO> parseIndicatorsJson(JSONObject jsonObject) {
+        List<IndicatorDTO> indicators = new ArrayList<>();
 
         JSONArray currency = jsonObject.getJSONArray(CURRENCY);
         for (int i = 0; i < currency.length(); ++i) {
@@ -73,8 +73,8 @@ public class RbcServiceImpl implements RbcService {
         return indicators;
     }
 
-    private Indicator createIndicator(JSONObject obj) {
-        Indicator indicator = new Indicator();
+    private IndicatorDTO createIndicator(JSONObject obj) {
+        IndicatorDTO indicator = new IndicatorDTO();
         indicator.setName(obj.getString(NAME));
         if (!obj.isNull(SUBNAME)) {
             indicator.setSubname(obj.getString(SUBNAME));

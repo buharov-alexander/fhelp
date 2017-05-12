@@ -1,8 +1,6 @@
-package ru.bukharov.fhelp.rbc.dto;
+package ru.bukharov.fhelp.dto;
 
-import java.util.Date;
-
-public class Indicator {
+public class IndicatorDTO {
 
     private String name;
     private String subname;
