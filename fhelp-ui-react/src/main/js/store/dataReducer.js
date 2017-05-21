@@ -17,7 +17,7 @@ export default function dataReducer(state = initialState, action) {
         return Object.assign({}, state, {accounts: accounts});
     } else if (action.type === 'LOAD_INDICATORS_SUCCESS') {
         return Object.assign({}, state, {indicators: action.payload});
-    } else if (action.type === 'UPDATE_ACCOUNT') {
+    } else if (action.type === 'UPDATE_ACCOUNT_SUCCESS') {
         let {states, ...updatedAccount} = action.payload;
         updatedAccount = balanceFormat(updatedAccount, state);
         const accountStates = Object.assign({}, state.accountStates);

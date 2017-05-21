@@ -27,7 +27,7 @@ export default store => next => action => {
                 store.dispatch({type: 'ADD_ACCOUNT_STATE_SUCCESS', payload: response.entity});
                 return client({method: 'GET', path: '/fhelp/account/accountWithStates/' + state.accountId});
                     }).then(response => {
-                        store.dispatch({ type: "UPDATE_ACCOUNT", payload: response.entity});
+                        store.dispatch({ type: "UPDATE_ACCOUNT_SUCCESS", payload: response.entity});
         });
     } else if (action.type === 'LOAD_ACCOUNTS') {
         client({method: 'GET', path: '/fhelp/rbc/indicators'}).then(response => {

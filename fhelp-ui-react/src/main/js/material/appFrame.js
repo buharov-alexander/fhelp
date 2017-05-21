@@ -12,6 +12,7 @@ import Overview from './overview/overview';
 import NewAccountPage from './creatingaccount/newAccountPage';
 import AccountDetailsPage from './accountdetails/accountDetailsPage';
 import Dashboard from './dashboard/dashboard';
+import NotificationComponent from './util/snackbar';
 
 class AppFrame extends Component {
 
@@ -47,6 +48,7 @@ class AppFrame extends Component {
                 <Route exact path="/fhelp/accountDetails" component={AccountDetailsPage} />
                 <Route exact path="/fhelp/dashboard" component={Dashboard} />
 
+                <NotificationComponent />
                 <link rel="stylesheet" href="../material.css" />
             </div>
         );

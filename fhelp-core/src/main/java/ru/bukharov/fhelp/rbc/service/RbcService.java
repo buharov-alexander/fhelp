@@ -1,10 +1,10 @@
 package ru.bukharov.fhelp.rbc.service;
 
-import ru.bukharov.fhelp.rbc.dto.Indicator;
+import ru.bukharov.fhelp.dto.IndicatorDTO;
 
 import java.util.List;
 
 public interface RbcService {
 
-    List<Indicator> getIndicators();
+    List<IndicatorDTO> getIndicators();
 }

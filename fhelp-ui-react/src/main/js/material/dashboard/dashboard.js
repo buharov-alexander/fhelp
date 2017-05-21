@@ -9,6 +9,9 @@ class Dashboard extends Component {
         return (
             <div>
                 <Paper className="paper contentColumn" style={{width: '30%'}} zDepth={2}>
+                    <AccountPie propertyForGrouping={account => account.name} />
+                </Paper>
+                <Paper className="paper contentColumn" style={{width: '30%'}} zDepth={2}>
                     <AccountPie propertyForGrouping={account => account.type} />
                 </Paper>
                 <Paper className="paper contentColumn" style={{width: '30%'}} zDepth={2}>
