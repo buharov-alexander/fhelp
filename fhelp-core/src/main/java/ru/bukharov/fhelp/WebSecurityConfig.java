@@ -13,8 +13,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/fhelp/rbc/*", "/fhelp/mmvb/*", "/fhelp/rambler/*").permitAll()
+                .antMatchers("/fhelp/rbc/*", "/fhelp/mmvb/*", "/fhelp/rambler/*",
+                        "/built/bundle.js", "/*.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
