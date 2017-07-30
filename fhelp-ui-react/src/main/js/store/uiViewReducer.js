@@ -1,7 +1,7 @@
 'use strict';
 
 const initialState = {isVisibleNewAccountPanel: false, isDrawerOpened: false,
-	snackbarOpen: false, snackbarMessage: ''};
+	snackbarOpen: false, snackbarMessage: '', showMenuIcon: true};
 
 export default function uiViewReducer(state = initialState, action) {
     if (action.type === 'SET_VISIBILITY_NEW_ACCOUNT_PANEL') {
@@ -18,6 +18,9 @@ export default function uiViewReducer(state = initialState, action) {
         return Object.assign({}, state, {snackbarOpen: true, snackbarMessage: 'Account was updated successfully'});
     } else if (action.type === 'SET_SNACKBAR_STATE') {
         return Object.assign({}, state, {snackbarOpen: action.payload.open, snackbarMessage: action.payload.message});
+    } else if (action.type === '@@router/LOCATION_CHANGE') {
+        const showMenuIcon = !(action.payload.pathname === '/login')
+        return Object.assign({}, state, {showMenuIcon: showMenuIcon});
     }
 
     return state;

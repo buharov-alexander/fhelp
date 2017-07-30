@@ -13,6 +13,7 @@ import NewAccountPage from './creatingaccount/newAccountPage';
 import AccountDetailsPage from './accountdetails/accountDetailsPage';
 import Dashboard from './dashboard/dashboard';
 import NotificationComponent from './util/snackbar';
+import LoginPage from './user/login';
 
 class AppFrame extends Component {
 
@@ -28,7 +29,7 @@ class AppFrame extends Component {
     render() {
         return (
             <div>
-                <AppBar title="Financial helper" onLeftIconButtonTouchTap={() => this.changeDrawerState()} />
+                <AppBar title="Financial helper" showMenuIconButton={this.props.showMenuIcon} onLeftIconButtonTouchTap={() => this.changeDrawerState()} />
                 <Drawer Drawer docked={false} open={this.props.isDrawerOpened} onRequestChange={(open) => this.props.actions.setDrawerOpened(open)} >
                     <MenuItem onTouchTap={() => this.chooseSection("/fhelp/home")}>
                         Overview
@@ -43,6 +44,7 @@ class AppFrame extends Component {
                         Dashboard
                     </MenuItem>
                 </Drawer>
+                <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/fhelp/home" component={Overview} />
                 <Route exact path="/fhelp/newAccount" component={NewAccountPage} />
                 <Route exact path="/fhelp/accountDetails" component={AccountDetailsPage} />
@@ -55,9 +57,11 @@ class AppFrame extends Component {
     }
 }
 
+
 function mapStateToProps (state) {
     return {
-        isDrawerOpened: state.ui.isDrawerOpened
+        isDrawerOpened: state.ui.isDrawerOpened,
+        showMenuIcon: state.ui.showMenuIcon
     }
 }
 
