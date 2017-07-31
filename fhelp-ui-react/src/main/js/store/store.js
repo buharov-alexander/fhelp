@@ -2,7 +2,8 @@
 
 import {createStore, applyMiddleware} from 'redux';
 import client from '../api/client';
-import actionMiddleware from './actionMiddleware';
+import accountActionMiddleware from './middleware/accountActionMiddleware';
+import userActionMiddleware from './middleware/userActionMiddleware';
 import combineReducer from './combineReducer';
 import createHistory from 'history/createBrowserHistory'
 import {routerMiddleware} from 'react-router-redux'
@@ -11,7 +12,7 @@ import {routerMiddleware} from 'react-router-redux'
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
 
-const createStoreWithMiddleware = applyMiddleware(routeMiddleware, actionMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(routeMiddleware, userActionMiddleware, accountActionMiddleware)(createStore);
 
 function configureStore() {
     const store = createStoreWithMiddleware(combineReducer);
