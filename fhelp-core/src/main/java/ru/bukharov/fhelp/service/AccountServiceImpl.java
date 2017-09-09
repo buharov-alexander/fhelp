@@ -12,8 +12,10 @@ import ru.bukharov.fhelp.dto.AccountStateDTO;
 import ru.bukharov.fhelp.dto.AccountWithStatesDTO;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -56,13 +58,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountStateDTO> getStatesByAccountId(Long accountId) {
-        List list = new ArrayList();
         Account account = accountRepository.findOne(accountId);
-        for (AccountState state : account.getStates()) {
-            AccountStateDTO stateDTO = createAccountStateDTO(state);
-            list.add(stateDTO);
-        }
-        return list;
+        return transformToAccountStateDTO(account.getStates());
     }
 
     @Override
@@ -115,11 +112,16 @@ public class AccountServiceImpl implements AccountService {
     private AccountWithStatesDTO createAccountWithStatesDTO(Account account) {
         AccountWithStatesDTO accountWithStatesDTO = new AccountWithStatesDTO();
         fillAccountDTO(accountWithStatesDTO, account);
-        for (AccountState state : account.getStates()) {
-            AccountStateDTO stateDTO = createAccountStateDTO(state);
-            accountWithStatesDTO.getStates().add(stateDTO);
-        }
+        List<AccountStateDTO> stateDTOList = transformToAccountStateDTO(account.getStates());
+        accountWithStatesDTO.getStates().addAll(stateDTOList);
         return accountWithStatesDTO;
+    }
+
+    private List<AccountStateDTO> transformToAccountStateDTO(Collection<AccountState> states) {
+        return states.stream()
+                .sorted((a, b) -> b.getDate().compareTo(a.getDate()))
+                .map(state -> createAccountStateDTO(state))
+                .collect(Collectors.toList());
     }
 
     private AccountDTO createAccountDTO(Account account) {
