@@ -2,6 +2,7 @@
 
 import {combineReducers} from 'redux';
 import uiViewReducer from './uiViewReducer';
+import statisticReducer from './statisticReducer';
 import dataReducer from './dataReducer';
 import userReducer from './userReducer';
 import {routerReducer} from 'react-router-redux'
@@ -12,5 +13,6 @@ export default combineReducers({
     data: dataReducer,
     router: routerReducer,
     form: formReducer,
-    user: userReducer
+    user: userReducer,
+    statistic: statisticReducer
 });
