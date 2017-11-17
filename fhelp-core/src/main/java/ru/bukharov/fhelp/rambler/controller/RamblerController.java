@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.bukharov.fhelp.aspect.log.LoggableMethod;
 import ru.bukharov.fhelp.domain.ValutaEnum;
 import ru.bukharov.fhelp.dto.IndicatorDTO;
 import ru.bukharov.fhelp.rambler.service.RamblerService;
@@ -21,6 +22,7 @@ public class RamblerController {
     @Autowired
     RamblerService ramblerService;
 
+    @LoggableMethod
     @RequestMapping(value = "/rates",method = RequestMethod.GET)
     public
     @ResponseBody

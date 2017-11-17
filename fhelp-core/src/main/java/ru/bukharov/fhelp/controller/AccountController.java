@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.bukharov.fhelp.aspect.log.LoggableMethod;
 import ru.bukharov.fhelp.dto.AccountDTO;
 import ru.bukharov.fhelp.dto.AccountStateDTO;
 import ru.bukharov.fhelp.dto.AccountWithStatesDTO;
@@ -21,6 +22,7 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    @LoggableMethod
     @RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
@@ -29,6 +31,7 @@ public class AccountController {
         return accountDTOList;
     }
 
+    @LoggableMethod
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -37,6 +40,7 @@ public class AccountController {
         return accountDTO;
     }
 
+    @LoggableMethod
     @RequestMapping(value = "/accountWithStates/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -45,6 +49,7 @@ public class AccountController {
         return accountWithStatesDTO;
     }
 
+    @LoggableMethod
     @RequestMapping(value = "/stateList/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -53,6 +58,7 @@ public class AccountController {
         return list;
     }
 
+    @LoggableMethod
     @RequestMapping(method = RequestMethod.POST)
     public
     @ResponseBody
@@ -61,6 +67,7 @@ public class AccountController {
         return resultAccountDTO;
     }
 
+    @LoggableMethod
     @RequestMapping(value = "/state", method = RequestMethod.POST)
     public
     @ResponseBody

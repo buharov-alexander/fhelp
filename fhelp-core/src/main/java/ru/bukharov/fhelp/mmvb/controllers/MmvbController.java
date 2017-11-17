@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.bukharov.fhelp.aspect.log.LoggableMethod;
 import ru.bukharov.fhelp.mmvb.service.MmvbService;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ public class MmvbController {
     @Autowired
     private MmvbService mmvbService;
 
+    @LoggableMethod
     @RequestMapping(value = "/rates", method = RequestMethod.GET)
     public
     @ResponseBody
