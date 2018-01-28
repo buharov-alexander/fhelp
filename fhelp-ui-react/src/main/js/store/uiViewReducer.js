@@ -16,6 +16,8 @@ export default function uiViewReducer(state = initialState, action) {
         return Object.assign({}, state, {snackbarOpen: true, snackbarMessage: 'Account was deleted successfully'});
     } else if (action.type === 'UPDATE_ACCOUNT_SUCCESS') {
         return Object.assign({}, state, {snackbarOpen: true, snackbarMessage: 'Account was updated successfully'});
+	} else if (action.type === 'LOGIN_FAILURE') {
+		return Object.assign({}, state, {snackbarOpen: true, snackbarMessage: 'Incorrect username or password'});
     } else if (action.type === 'SET_SNACKBAR_STATE') {
         return Object.assign({}, state, {snackbarOpen: action.payload.open, snackbarMessage: action.payload.message});
     } else if (action.type === '@@router/LOCATION_CHANGE') {
