@@ -1,28 +1,28 @@
-package ru.bukharov.fhelp.mmvb.controllers;
+package ru.bukharov.fhelp.rbc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.bukharov.fhelp.aspect.log.LoggableMethod;
-import ru.bukharov.fhelp.mmvb.service.MmvbService;
+import ru.bukharov.fhelp.dto.IndicatorDTO;
+import ru.bukharov.fhelp.rbc.service.RbcService;
 
-import java.util.Map;
+import java.util.List;
 
 @Controller
-@RequestMapping("/fhelp/mmvb")
-public class MmvbController {
+@RequestMapping("/fhelp/rbc")
+public class RbcController {
 
     @Autowired
-    private MmvbService mmvbService;
+    RbcService rbcService;
 
     @LoggableMethod
-    @RequestMapping(value = "/rates", method = RequestMethod.GET)
+    @RequestMapping(value = "/indicators", method = RequestMethod.GET)
     public
     @ResponseBody
-    Map<String, Double> getCurrentCbrfRates(ModelMap model) {
-        return mmvbService.getCurrentCbrfRates();
+    List<IndicatorDTO> getIndicators() {
+        return rbcService.getIndicators();
     }
 }
