@@ -14,6 +14,7 @@ import AccountDetailsPage from './accountdetails/accountDetailsPage';
 import Dashboard from './dashboard/dashboard';
 import NotificationComponent from './util/snackbar';
 import LoginPage from './user/login';
+import LogoutButton from './user/logoutButton';
 
 class AppFrame extends Component {
 
@@ -29,7 +30,12 @@ class AppFrame extends Component {
     render() {
         return (
             <div>
-                <AppBar title="Financial helper" showMenuIconButton={this.props.showMenuIcon} onLeftIconButtonTouchTap={() => this.changeDrawerState()} />
+                <AppBar
+                    title="Financial helper"
+                    showMenuIconButton={this.props.showMenuIcon}
+                    onLeftIconButtonTouchTap={() => this.changeDrawerState()}
+                    iconElementRight={<LogoutButton />}
+                />
                 <Drawer Drawer docked={false} open={this.props.isDrawerOpened} onRequestChange={(open) => this.props.actions.setDrawerOpened(open)} >
                     <MenuItem onTouchTap={() => this.chooseSection("/fhelp/home")}>
                         Overview
