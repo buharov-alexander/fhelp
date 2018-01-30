@@ -1,10 +1,8 @@
 'use strict';
 
 import client from '../../api/client';
-import {push} from 'react-router-redux';
 
 export default store => next => action => {
-    console.log(action);
     if (action.type === 'ADD_ACCOUNT') {
         const newAccount = action.payload;
         client({method: 'POST',
