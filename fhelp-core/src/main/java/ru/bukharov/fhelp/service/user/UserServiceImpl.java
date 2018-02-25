@@ -73,6 +73,13 @@ public class UserServiceImpl implements UserService {
         return name;
     }
 
+    @Override
+    public User getCurrentLoggedInUser() {
+        String username = getCurrentLoggedInUsername();
+        User user = userDAO.findByUsername(username);
+        return user;
+    }
+
     // Converts our domain object to spring security objects
     private org.springframework.security.core.userdetails.User buildUser(User user,
                                                                          List<GrantedAuthority> authorities) {
