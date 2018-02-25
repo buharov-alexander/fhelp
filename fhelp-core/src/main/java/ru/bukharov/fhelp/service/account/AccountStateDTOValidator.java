@@ -1,4 +1,4 @@
-package ru.bukharov.fhelp.service;
+package ru.bukharov.fhelp.service.account;
 
 import ru.bukharov.fhelp.dto.AccountStateDTO;
 import ru.bukharov.fhelp.util.IValidator;

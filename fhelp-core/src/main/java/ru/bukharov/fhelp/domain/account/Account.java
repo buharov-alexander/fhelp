@@ -1,6 +1,8 @@
-package ru.bukharov.fhelp.domain;
+package ru.bukharov.fhelp.domain.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ru.bukharov.fhelp.domain.AccountTypeEnum;
+import ru.bukharov.fhelp.domain.ValutaEnum;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,6 +32,8 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     private ValutaEnum valuta;
+
+    private Long userId;
 
     @JsonIgnore
     @OrderBy("date DESC")
@@ -78,5 +82,13 @@ public class Account {
 
     public void setValuta(ValutaEnum valuta) {
         this.valuta = valuta;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

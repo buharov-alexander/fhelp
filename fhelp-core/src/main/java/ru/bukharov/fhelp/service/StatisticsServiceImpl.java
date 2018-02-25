@@ -2,10 +2,11 @@ package ru.bukharov.fhelp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bukharov.fhelp.dao.AccountDAO;
-import ru.bukharov.fhelp.domain.Account;
-import ru.bukharov.fhelp.domain.AccountState;
+import ru.bukharov.fhelp.dao.account.AccountDAO;
+import ru.bukharov.fhelp.domain.account.Account;
+import ru.bukharov.fhelp.domain.account.AccountState;
 import ru.bukharov.fhelp.domain.ValutaEnum;
+import ru.bukharov.fhelp.service.account.AccountService;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,12 +22,12 @@ public class StatisticsServiceImpl implements StatisticsService {
     public static final int NUMBER_OF_MONTHS = 12;
 
     @Autowired
-    private AccountDAO accountDAO;
+    private AccountService accountService;
 
     @Override
     public Map<Date, Map<ValutaEnum, Double>> getMonthBalances() {
         Map<Date, Map<ValutaEnum, Double>> res = new HashMap<>();
-        Iterable<Account> accounts = accountDAO.findAll();
+        Iterable<Account> accounts = accountService.getAccounts();
 
         for (int i = 0; i < NUMBER_OF_MONTHS; i++) {
             Calendar cal = Calendar.getInstance();
