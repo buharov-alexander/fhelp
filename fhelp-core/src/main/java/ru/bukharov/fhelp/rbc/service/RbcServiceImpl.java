@@ -25,8 +25,8 @@ public class RbcServiceImpl implements RbcService {
     private static final String CB = "ЦБ.";
     private static final String USD = "USD";
     private static final String EUR = "EUR";
-    private static final String MMVB = "ММВБ";
-    private static final String RTS = "РТС";
+    private static final String MMVB = "MOEX";
+    private static final String RTS = "RTS";
     private static final String BRENT = "Brent";
     private static final String DATE = "date";
     private static final String VALUE_1 = "value1";
