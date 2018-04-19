@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 class AccountTable extends Component {
+
     
     handleSelect(indexes) {
-        const accountId = indexes[0] ? this.props.accounts[indexes[0]].id : undefined;
+        const accountId = indexes.length ? this.props.accounts[indexes[0]].id : undefined;
         this.props.actions.setCurrentAccount(accountId);
     }
 
